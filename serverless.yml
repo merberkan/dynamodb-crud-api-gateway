@@ -18,8 +18,8 @@ functions:
   getPost:
     handler: api.getPost
     name: get-post
-    memorySize: 128 #mb
-    timeout: 5 #seconds
+    memorySize: 128 # mb
+    timeout: 5 # seconds
     events:
       - http:
           path: post/{postId}
@@ -32,8 +32,8 @@ functions:
   createPost:
     handler: api.createPost
     name: create-post
-    memorySize: 128 #mb
-    timeout: 5 #seconds
+    memorySize: 128 # mb
+    timeout: 5 # seconds
     events:
       - http:
           path: post
@@ -46,8 +46,8 @@ functions:
   updatePost:
     handler: api.updatePost
     name: update-post
-    memorySize: 128 #mb
-    timeout: 5 #seconds
+    memorySize: 128 # mb
+    timeout: 5 # seconds
     events:
       - http:
           path: post/{postId}
@@ -60,8 +60,8 @@ functions:
   deletePost:
     handler: api.deletePost
     name: delete-post
-    memorySize: 128 #mb
-    timeout: 5 #seconds
+    memorySize: 128 # mb
+    timeout: 5 # seconds
     events:
       - http:
           path: post/{postId}
@@ -74,8 +74,8 @@ functions:
   getAllPosts:
     handler: api.getAllPosts
     name: get-all-posts
-    memorySize: 128 #mb
-    timeout: 5 #seconds
+    memorySize: 128 # mb
+    timeout: 5 # seconds
     events:
       - http:
           path: posts
@@ -87,17 +87,17 @@ functions:
         Resource: !GetAtt PostsTable.Arn
 
 resources:
-  Resource:
+  Resources:
     PostsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:.custom.postsTable}
+        TableName: ${self:custom.postsTableName}
         AttributeDefinitions:
           - AttributeName: postId
             AttributeType: S
         KeySchema:
           - AttributeName: postId
-            KeyType: Hash
+            KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
